@@ -4,14 +4,15 @@ jdk: oraclejdk8
 
 android:
   components:
+    # 构建项目所用的BuildTools版本
     - build-tools-28.0.3
+    # 用来编译项目的SDK版本
     - android-28
+
+    # 添加Android Support Repository组件
     - extra-android-m2repository
+    # 添加Support Library组件
     - extra-android-support
-    - extra
-
-
-before_install:
 
 
 before_script:
@@ -22,4 +23,3 @@ script:
   - ./gradlew assembleRelease
 
 
-deploy:

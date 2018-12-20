@@ -21,3 +21,4 @@ deploy:
   file: app/build/outputs/apk/app-release.apk
   on:
     repo: xch168/AndroidTravisCI
+    tags: true

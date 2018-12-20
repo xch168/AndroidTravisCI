@@ -1,21 +1,23 @@
 language: android
 jdk: oraclejdk8
-
 sudo: false
-
 android:
   components:
   - build-tools-28.0.3
   - android-28
   - extra-android-m2repository
   - extra-android-support
-
 before_install:
-  - openssl aes-256-cbc -K $encrypted_d71df9144721_key -iv $encrypted_d71df9144721_iv
-    -in xch_android.jks.enc -out xch_android.jks -d
-
+- openssl aes-256-cbc -K $encrypted_d71df9144721_key -iv $encrypted_d71df9144721_iv
+  -in xch_android.jks.enc -out xch_android.jks -d
 before_script:
 - chmod +x gradlew
-
 script:
 - "./gradlew assembleRelease"
+deploy:
+  provider: releases
+  api_key:
+    secure: b7dhz7j5tY73qbQo2GNccev7NgI6BNWNeEpEfmLTxRZ7DJptxtQuJIHF026zhHtXfRom/pSXw7qlRJXamPWl7Bc1i1lUNKX7Mdt3Fo7Z70ZAyT/6vak3EGlKqDU7Ta96MOB2+5+2nQ7nlTX4kkkeObSTbD6py4eUzktoxsPSwtjiWrq7KM4KgcJTAEGnZx4LJdFm6pgE3drkbN83J0ZP3fT7sf+5Ggv4WLa8y3l/gM3rQ0tARebDo4OuigJOmknOfcxkiAlTtVt1qw1STMaW4H/M47K1mSvQK9DxSHUCD7ngvxEJlUMtqvYSIqQItyT7D8SvDxUqpZZM6y6qAcp+q5qrnA/uC7Qa3kju3skH1XBXyA20TN/pLYKk1yuH7TLg9W+512Pmgtpr4AiZayChnNn4morhhhncsdnQf1T6ziWUNGHmMK8QcUzjBdZHOVsNHGUuaGk4hOPeTRi7ozHYMnNF1E8HJEhtLf7/BHH4o17x5wI2QuSmgwqlCbhAYEwL8m9ZtyJ7saqimGo6m37XfBlomBgaTMrCDIybqOABjPxASlMVRh84XZeeAHHLgjSRMoP2cb+lksiyhO2TsCOvQEOmofFcjj4+iN+qIynPMb3bonuce/iD9nNC2cusibYaIrr1+r2VWE61EdIiLlamw99fFT1VZtliJuJe9tugMgA=
+  file: app/build/outputs/apk/app-release.apk
+  on:
+    repo: xch168/AndroidTravisCI

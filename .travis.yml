@@ -10,6 +10,14 @@ android:
 before_install:
 - openssl aes-256-cbc -K $encrypted_d71df9144721_key -iv $encrypted_d71df9144721_iv
   -in xch_android.jks.enc -out xch_android.jks -d
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  #指定缓存目录
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
 before_script:
 - chmod +x gradlew
 script:

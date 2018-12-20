@@ -20,8 +20,33 @@ allprojects {
         google()
         jcenter()
     }
+    loadLocalProperties()
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+def loadLocalProperties(){
+    File file = rootProject.file('local.properties')
+    if(file.exists()){
+        //加载资源
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+        Properties properties = new Properties()
+        properties.load(inputStream)
+
+        Iterator<Map.Entry<Object, Object>> it = properties.entrySet().iterator()
+        while (it.hasNext()) {
+            Map.Entry<Object, Object> entry = it.next()
+            Object key = entry.getKey()
+            Object value = entry.getValue()
+            if (!extensions.properties.containsKey(key)) {
+                //extensions.add(key, value)
+                System.out.println("key   :" + key)
+                System.out.println("value :" + value)
+                System.out.println("---------------")
+            }
+        }
+
+    }
 }

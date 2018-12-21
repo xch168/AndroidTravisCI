@@ -27,9 +27,6 @@ before_script:
 - chmod +x gradlew
 script:
 - "./gradlew assembleRelease"
-after_script:
- - set -e
- - $TRAVIS_BUILD_DIR/pgyer_upload.sh "${TRAVIS_BUILD_DIR}/app/build/outputs/apk/release/app-release.apk" "f0d4c0034f432bfe3d794de29f0f689e"
 deploy:
   provider: releases
   api_key:
@@ -39,3 +36,7 @@ deploy:
   on:
     repo: xch168/AndroidTravisCI
     tags: true
+
+after_deploy:
+ - set -e
+ - $TRAVIS_BUILD_DIR/pgyer_upload.sh "${TRAVIS_BUILD_DIR}/app/build/outputs/apk/release/app-release.apk" "f0d4c0034f432bfe3d794de29f0f689e"

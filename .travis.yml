@@ -41,4 +41,4 @@ deploy:
 after_deploy:
  - set -e
  - $TRAVIS_BUILD_DIR/pgyer_upload.sh "${TRAVIS_BUILD_DIR}/app/build/outputs/apk/release/app-release.apk" $PGYER_API_KEY
- - fir p app/build/outputs/apk/release/app-release.apk -T $FIR_TOKEN -c "`git cat-file tag $FIR_API_TOKEN`"
+ - fir p app/build/outputs/apk/release/app-release.apk -T $FIR_API_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"

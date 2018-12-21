@@ -20,4 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.i(TAG, "onResume");
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onResume");
+    }
 }
